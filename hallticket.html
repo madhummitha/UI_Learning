@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM</title>
+</head>
+<style>
+
+    label,input {
+        display: inline-block;
+        padding: 5px;
+    }
+
+    label {
+        width: 45%;
+        text-align: right;
+    }
+
+    select {
+        margin-left: 4%;
+    }
+
+    label+input {
+        margin: 5px 0 0 4%;
+    }
+
+    .flex_parent {
+        display: flex;
+        margin-top: 20px;
+    }
+
+    .cen {
+        justify-content: center;
+    }
+
+    input.margin_right {
+        margin-right: 20px;
+    }
+
+    .container {
+        display: none;
+        border-style: solid;
+        width: 40%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    table {
+        width: 310px;
+    }
+
+    table, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table.center {
+        margin-left: auto; 
+        margin-right: auto;
+    }
+
+</style>
+<body>
+    <form id="clg_form">
+        <label for="cname">College Name:</label>
+        <input type="text" id="cname" name="college_name" value="Anna University College"><br>
+
+        <label for="city_state">City, State:</label>
+        <input type="text" id="city_state" name="city_state" value="Guindy, Tamilnadu"><br>
+        
+        <label>Examination Month-Year:</label>
+        <input type="text" id="month" name="exam_month" value="July">
+        <input type="text" id="year" name="exam_year" value="2022"><br>
+        
+        <label for="sname">Student Name:</label>
+        <input type="text" id="sname" name="student_name" value="Madhummitha"><br>
+        
+        <label for="reg_no">Reg No:</label>
+        <input type="text" id="reg_no" name="reg_no" value="310618205045"><br>
+        
+        <label for="dept">Department:</label>
+            <select name="department" id="dept">
+                <option value="cse">CSE</option>
+                <option value="eee">EEE</option>
+                <option value="mech">Mech</option>
+            </select>
+            <br><br>
+        
+        <label for="cname">Course Codes:</label>
+        <input type="text" id="course_codes" name="course_codes" value="ME1731, ME17543, ME17021, ME17432, ME17543"><br>
+        
+        <div class="flex_parent cen">
+            <input class="margin_right" type="submit" value="Show">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+
+    <br>
+
+    <div id="con" class="container">
+        <h3 id="clgname">Anna University College</h3>
+        <p id="cs">Guindy, Tamilnadu</p>
+        <p>Hall Ticket - <span id="m"></span> <span id="y"></span></p>
+
+    
+        <p>Name of the Candidate: <span id="name"></span></p>
+        <p>Registration Number: <span id="regno"></span></p>
+        <p>Department: <span id="depp"></span></p>
+        
+        <h4>Module Details:</h4>
+        
+        <table class="center">
+            <tr>
+                <td id="1">
+                    
+                </td>
+                <td id="2">
+                    
+                </td>
+                <td id="3">
+                    
+                </td>
+                <td id="4">
+                    
+                </td>
+            </tr>
+            <tr>
+                <td id="5">
+                    
+                </td>
+                <td id="6">
+                    
+                </td>
+            </tr>
+        </table>
+        <br>
+
+        <div>
+            <span style="float: left;">Signature of the Candidate</span>
+            <span style="float: right;">Signature of HOD</span>
+        </div>
+        <br>
+    </div>
+</body>
+<script>
+
+    var form = document.getElementById('clg_form');
+
+    form.addEventListener('submit', function(event){
+        event.preventDefault()
+
+        var clgname = document.getElementById('cname').value;
+
+        var city_state = document.getElementById('city_state').value;
+        const cs = city_state.split(",");
+
+        var city = cs[0];
+        var state = cs[1];
+
+        var month = document.getElementById('month').value;
+        var year = document.getElementById('year').value;
+
+        var sname = document.getElementById('sname').value;
+
+        var regno = document.getElementById('reg_no').value;
+
+        var dep = document.getElementById("dept").value;
+
+        var dept;
+        if(dep === "cse") {
+            dept = "Computer Science Engineering"
+        } else if(dep === "eee") {
+            dept = "Electrical and Electronics Engineering"
+        } else {
+            dept = "Mechanical Engineering"
+        }
+
+        var course_codes = document.getElementById('course_codes').value;
+        const cc = course_codes.split(",");
+
+        for(let i=1; i<=cc.length; i++) {
+            document.getElementById(i).innerHTML = cc[i-1];
+        }
+
+        document.getElementById("clgname").innerHTML = clgname;
+        document.getElementById("cs").innerHTML = city_state;
+        document.getElementById("m").innerHTML = month;
+        document.getElementById("y").innerHTML = year;
+        document.getElementById("name").innerHTML = sname;
+        document.getElementById("regno").innerHTML = regno;
+        document.getElementById("depp").innerHTML = dept;
+
+        document.getElementById("con").style.display = "block";
+
+        console.log(clgname);
+    })
+</script>
+</html>
